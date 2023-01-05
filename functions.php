@@ -3,7 +3,7 @@
 // Memisahkan logika codingan dengan tampilan web
 
     // Membuat koneksi ke database
-    $conn = mysqli_connect("localhost", "root", "root", "spk_pengajar_pesantren");
+    $conn = mysqli_connect("localhost", "root", "123456", "spk_pengajar_pesantren");
 
     // Mmbuat fungsi query
     function query($query) {
@@ -24,15 +24,30 @@
     }
 
     function registrasi($data) {
+        //mengambil data koneksi ke database
         global $conn;
 
+        //mengambil data yang dikirim oleh form melalui method post
+        /**
+         * function stripslashes untuk membersihkan data yang diinput user, misalnya user menginput data yang ada karakter "/"
+         * maka akan dihapus karakter tersebut
+         */
+        /**
+         * function strlower untuk mengkonversi data yang diinput user menjadi huruf kecil semua
+         */
+        /**
+         * function mysqli_real_escape_string berguna untuk membuat user bisa memasukkan password yang ada karakter tanda kutip
+         * dan tanda kutipnya bisa masuk ke database dengan aman
+         */
+        $name = stripslashes($data["name"]);
         $username = strtolower(stripslashes($data["username"]));
         $password = mysqli_real_escape_string($conn, $data["password"]);
-        $password2 = mysqli_real_escape_string($conn, $data["password2"]);
+        $confirmPassword = mysqli_real_escape_string($conn, $data["confirmPassword"]);
+        $level = strtolower($data["level"]);
 
 
        // Cek username sudah ada atau belum
-       $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username' ");
+       $result = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
        
        // Jika username nya sudah ada didalam database
        if( mysqli_fetch_assoc($result) ) {
@@ -43,10 +58,11 @@
        }
 
        //  Cek konfirmasi password
-       if ( $password !== $password2 ) {
+       if ( $password !== $confirmPassword ) {
            echo "<script>
                        alert('Konfirmasi password Anda tidak sesuai!');
                  </script>";
+           //return false untuk memberhentikan program      
            return false;
        }
        // return 1;
@@ -59,7 +75,7 @@
        // var_dump($password); die;
 
        // Tambahkan user baru ke dalam database
-       mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$password')");
+       mysqli_query($conn, "INSERT INTO users VALUES(0, '$name' ,'$username', '$password', '$level')");
        return mysqli_affected_rows($conn);
        
    }

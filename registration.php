@@ -101,7 +101,7 @@
     <form action="" method = "post">
         <div class="form-floating">
         <input type="name" class="form-control" id="name" placeholder="Name" name="name" require>
-        <label for="name">Username</label>
+        <label for="name">Name</label>
         </div>
         <div class="form-floating">
         <input type="username" class="form-control" id="username" name="username" placeholder="Username" require>
@@ -112,8 +112,11 @@
         <label for="password">Password</label>
         </div>
         <div class="form-floating">
-        <input type="confirmPassword" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Konfirmasi Password">
-        <label for="confirmPassword">Password</label>
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Konfirmasi Password">
+        <label for="confirmPassword">Konfirmasi Password</label>
+        </div>
+        <div class="form-floating">
+        <input type="hidden" class="form-control" id="level" name="level" value="pengunjung">
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit" name="signup">Sign Up</button>
         <p>Sudah punya akun? <a href="registration.php">login sekarang</a></p>
