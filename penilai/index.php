@@ -10,11 +10,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
-    
-
-    
-
-  <link href="../assests/boostrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assests/boostrap/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -75,11 +71,11 @@
   </head>
   <body>
 
-  <?php include '../assests/components/navbar_admin.php'; ?>
+  <?php include '../components/navbar_penilai.php'; ?>
 
 <div class="container-fluid">
   <div class="row">
-    <?php include '../assests/components/sidebar_admin.php' ?>
+    <?php include '../components/sidebar_penilai.php' ?>
 
     
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

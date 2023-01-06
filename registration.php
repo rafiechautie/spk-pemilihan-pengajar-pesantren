@@ -10,6 +10,8 @@
             echo "<script>
                         alert('User baru berhasil ditambahkan');
                 </script>";
+                header("Location: login.php");
+                exit;
         } else {
             echo mysqli_error($conn);
         }
@@ -119,7 +121,7 @@
         <input type="hidden" class="form-control" id="level" name="level" value="pengunjung">
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit" name="signup">Sign Up</button>
-        <p>Sudah punya akun? <a href="registration.php">login sekarang</a></p>
+        <p>Sudah punya akun? <a href="login.php">login sekarang</a></p>
     </form>
 </main>
 

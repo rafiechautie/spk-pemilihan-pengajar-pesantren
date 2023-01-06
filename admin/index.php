@@ -75,11 +75,11 @@
   </head>
   <body>
 
-  <?php include '../assests/components/navbar_admin.php'; ?>
+  <?php include '../components/navbar_admin.php'; ?>
 
 <div class="container-fluid">
   <div class="row">
-    <?php include '../assests/components/sidebar_admin.php' ?>
+    <?php include '../components/sidebar_admin.php' ?>
 
     
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
