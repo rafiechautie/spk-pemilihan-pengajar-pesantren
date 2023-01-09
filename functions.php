@@ -8,6 +8,8 @@
     // Mmbuat fungsi query
     function query($query) {
         global $conn;
+
+        //ambil data dari database dan disimpan ke variable result
         $result = mysqli_query($conn, $query);
 
         // Data kosong

@@ -16,7 +16,7 @@
     // Query data mahasiswa disimpan ke dalam variabel mahasiswa dan bentuknya array
     // ASC / Ascending (Membesar)
     // DESC / Descending (Mengecil)
-    // $mahasiswa = query("SELECT * FROM mahasiswa");
+    $users = query("SELECT * FROM users");
 
     // Jika tombol cari ditekan
     // if( isset($_POST["cari"]) ) {
@@ -51,8 +51,34 @@
     
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Selamat datang di Dashboard Admin</h1>
+        <h1 class="h2">Daftar Users</h1>
       </div>
+      <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Nama Lengkap</th>
+      <th scope="col">Level</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php $no = 1; ?>
+    <!-- Menggunakan foreach utuk looping array untuk menampilkan data -->
+    <?php foreach( $users as $user ) : ?>
+    <tr>
+      <th scope="row"><?= $no ?></th>
+      <td><?= $user["nama"] ?></td>
+      <td><?= $user["level"] ?></td>
+      <td>
+        <a href="">Edit</a>
+        <a href="">Delete</a>
+      </td>
+    </tr>
+    <?php $no++; ?>
+    <?php endforeach; ?>
+  </tbody>
+</table>
     </main>
   </div>
 </div>
