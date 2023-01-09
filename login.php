@@ -1,6 +1,6 @@
 <?php 
     // Menjalankan session start
-    // session_start();
+    session_start();
     require 'functions.php';
 
     // Mengecek Cookie apkah sudah tersedia
@@ -28,12 +28,12 @@
     // }
 
     // Jika sudah login
-    // if( isset($_SESSION["login"]) ) {
+    if( isset($_SESSION["signin"]) ) {
 
-        // Pindahkan ke halaman index setelah login
-        // header("Location: index.php");
-        // exit;
-    // }
+        //Kasih peringatan bahwa anda sudah login
+        // TODO 
+        
+    }
 
 
     // Menegcek apakah tombol login sudah ditekan atau belum
@@ -63,7 +63,7 @@
                 if( password_verify($password, $row["password"]) ) {
         
                     // Set session
-                    // $_SESSION["login"] = true;
+                    $_SESSION["signin"] = true;
 
                     // Jika Rememberme dichecklist maka menggunakan cookie
                     // if( isset($_POST['remember']) ) {
