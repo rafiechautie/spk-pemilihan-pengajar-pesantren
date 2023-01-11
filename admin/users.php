@@ -27,19 +27,7 @@
 ?>
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.108.0">
-    <title>Dashboard Template · Bootstrap v5.3</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
-    <link href="../assests/boostrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="../assests/boostrap/css/dashboard.css" rel="stylesheet">
-  </head>
+  <?php include '../components/head.php'; ?>
   <body>
 
   <?php include '../components/navbar_admin.php'; ?>
@@ -54,30 +42,30 @@
         <h1 class="h2">Daftar Users</h1>
       </div>
       <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">No</th>
-      <th scope="col">Nama Lengkap</th>
-      <th scope="col">Level</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php $no = 1; ?>
-    <!-- Menggunakan foreach utuk looping array untuk menampilkan data -->
-    <?php foreach( $users as $user ) : ?>
-    <tr>
-      <th scope="row"><?= $no ?></th>
-      <td><?= $user["nama"] ?></td>
-      <td><?= $user["level"] ?></td>
-      <td>
-        <a href="">Edit</a>
-        <a href="">Delete</a>
-      </td>
-    </tr>
-    <?php $no++; ?>
-    <?php endforeach; ?>
-  </tbody>
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Nama Lengkap</th>
+          <th scope="col">Level</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php $no = 1; ?>
+        <!-- Menggunakan foreach utuk looping array untuk menampilkan data -->
+        <?php foreach( $users as $user ) : ?>
+        <tr>
+          <th scope="row"><?= $no ?></th>
+          <td><?= $user["nama"] ?></td>
+          <td><?= $user["level"] ?></td>
+          <td>
+            <a href="ubah.php?id=<?= $row["id"]; ?>">Ubah</a> ||
+            <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin ?'); " >Hapus</a>
+          </td>
+        </tr>
+        <?php $no++; ?>
+        <?php endforeach; ?>
+      </tbody>
 </table>
     </main>
   </div>

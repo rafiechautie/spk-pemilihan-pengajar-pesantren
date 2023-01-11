@@ -25,7 +25,13 @@
         return $rows;
     }
 
-    function registrasi($data) {
+    function hapus($id) {
+        global $conn;
+        mysqli_query($conn, "DELETE FROM users WHERE id = $id");
+        return mysqli_affected_rows($conn);
+    }
+
+    function registrasi($data) {    
         //mengambil data koneksi ke database
         global $conn;
 
