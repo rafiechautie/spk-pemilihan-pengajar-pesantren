@@ -3,7 +3,7 @@
     session_start();
 
     // Jika tidak ada session login
-    if( !isset($_SESSION["signin"]) ) {
+    if( !isset($_SESSION["login"]) ) {
         // Maka keluarkan user ke halaman login
         header("Location: ../login.php");
         exit;
@@ -25,29 +25,78 @@
     //     $mahasiswa = cari($_POST["keyword"]);
     // } 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <?php include '../components/head.php'; ?>
-  <body>
 
-  <?php include '../components/navbar_admin.php'; ?>
+<?php include '../components/head.php'; ?>
 
-<div class="container-fluid">
-  <div class="row">
-    <?php include '../components/sidebar_admin.php' ?>
+<body id="page-top">
 
-    
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Selamat datang di Dashboard Admin</h1>
-      </div>
-    </main>
-  </div>
-</div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <?php include '../components/sidebar_admin.php' ?>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <?php include '../components/navbar_admin.php' ?>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Halaman Dashboard</h1>
+                    </div>
 
 
-    <script src="../assests/boostrap/js/bootstrap.bundle.min.js"></script>
+                </div>
+                <!-- /.container-fluid -->
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../boostrap/js/dashboard.js"></script>
-  </body>
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Sistem Pendukung Keputusan Pemilihan Pengajar Pesantren</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+  
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../assests/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../jquery/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+
+</body>
+
 </html>

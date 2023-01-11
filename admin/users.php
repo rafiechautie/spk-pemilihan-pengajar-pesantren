@@ -3,7 +3,7 @@
     session_start();
 
     // Jika tidak ada session login
-    if( !isset($_SESSION["signin"]) ) {
+    if( !isset($_SESSION["login"]) ) {
         // Maka keluarkan user ke halaman login
         header("Location: ../login.php");
         exit;
@@ -25,55 +25,130 @@
     //     $mahasiswa = cari($_POST["keyword"]);
     // } 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <?php include '../components/head.php'; ?>
-  <body>
 
-  <?php include '../components/navbar_admin.php'; ?>
+<?php include '../components/head.php'; ?>
 
-<div class="container-fluid">
-  <div class="row">
-    <?php include '../components/sidebar_admin.php' ?>
+<body id="page-top">
 
-    
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Daftar Users</h1>
-      </div>
-      <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">No</th>
-          <th scope="col">Nama Lengkap</th>
-          <th scope="col">Level</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php $no = 1; ?>
-        <!-- Menggunakan foreach utuk looping array untuk menampilkan data -->
-        <?php foreach( $users as $user ) : ?>
-        <tr>
-          <th scope="row"><?= $no ?></th>
-          <td><?= $user["nama"] ?></td>
-          <td><?= $user["level"] ?></td>
-          <td>
-            <a href="ubah.php?id=<?= $row["id"]; ?>">Ubah</a> ||
-            <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin ?'); " >Hapus</a>
-          </td>
-        </tr>
-        <?php $no++; ?>
-        <?php endforeach; ?>
-      </tbody>
-</table>
-    </main>
-  </div>
-</div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <?php include '../components/sidebar_admin.php' ?>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <?php include '../components/navbar_admin.php' ?>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                     <h1 class="h3 mb-2 text-gray-800">Data Users</h1>
+                    <p class="mb-4">Ini adalah halaman data users yang melakukan registrasi ke sistem pendukung keputusan pemilihan pengajaran pesantren.</p>
 
 
-    <script src="../assests/boostrap/js/bootstrap.bundle.min.js"></script>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Users</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Level</th>
+                                            <th>Action</th> 
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Level</th>
+                                            <th>Action</th> 
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                      <?php $no = 1 ?>
+                                      <?php foreach($users as $user) : ?>
+                                        <tr>
+                                            <td><?= $no ?></td>
+                                            <td><?= $user["nama"] ?></td>
+                                            <td><?= $user["level"] ?></td>
+                                            <td>
+                                              <a href="">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                              </svg>
+                                              </a>
+                                              <a href="">
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                              </svg>
+                                              </a>
+                                            </td>
+                                        </tr>
+                                        <?php $no++ ?>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../boostrap/js/dashboard.js"></script>
-  </body>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Sistem Pendukung Keputusan Pemilihan Pengajar Pesantren</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+  
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../assests/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../jquery/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+
+</body>
+
 </html>
