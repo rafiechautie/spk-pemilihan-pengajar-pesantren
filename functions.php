@@ -86,6 +86,19 @@
         return mysqli_affected_rows($conn);
     }
 
+    // Membuat function cari untuk mengetikkan keyword cari
+    function cari($keyword) {
+
+        // Mencari mahasiswa yang namanya tersedia
+        $query = "SELECT * FROM users WHERE nama LIKE '%$keyword%' OR
+                                                username LIKE '%$keyword%' OR
+                                                tingkat LIKE '%$keyword%' ";
+
+        // Memanggil fungsi yang sudah dibuat didalam fungsi baru
+        return query($query);
+    }
+
+
     function registrasi($data) {    
         //mengambil data koneksi ke database
         global $conn;
