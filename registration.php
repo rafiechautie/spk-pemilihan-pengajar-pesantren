@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="hidden" class="form-control" id="level" name="level" value="pengunjung">
+                                    <input type="hidden" class="form-control" id="tingkat" name="tingkat" value="pengunjung">
                                 </div>
                                 <button name="register" type="submit" class="btn btn-primary btn-user btn-block" >Daftar</button>
                                 <hr>

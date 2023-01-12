@@ -75,10 +75,10 @@
 
 
                     // Arahkan user untuk masuk ke sebuah sistem
-                    if($row["level"] == "admin"){
+                    if($row["tingkat"] == "admin"){
                       header("Location: admin/index.php");
                       exit;
-                    }else if($row["level"] == "penilai"){
+                    }else if($row["tingkat"] == "penilai"){
                       header("Location: penilai/index.php");
                       exit;
                     }

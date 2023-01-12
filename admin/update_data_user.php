@@ -1,4 +1,5 @@
-<?php
+<?php 
+
     // Menjalankan session
     session_start();
 
@@ -9,21 +10,35 @@
         exit;
     }
 
-    // Menyiapkan data yang akan disimpan ke dalam tabel
-    // Menghubungkan functions ke dalam file
+    // Menghubungkan halaman ubah yang kita punya ke dalam halaman function tempan menyimpan function nya
     require '../functions.php';
 
-    // Query data mahasiswa disimpan ke dalam variabel mahasiswa dan bentuknya array
-    // ASC / Ascending (Membesar)
-    // DESC / Descending (Mengecil)
-    $users = query("SELECT * FROM users");
+    // Mengambil data dari url
+    $id = $_GET["id"];
+    // var_dump($id);
 
-    // Jika tombol cari ditekan
-    // if( isset($_POST["cari"]) ) {
+    // Query data mahasiswa berdasarkan id
+    $user = query("SELECT * FROM users WHERE id = $id")[0];
 
-    //     // Maka jalankan pencarian keyword
-    //     $mahasiswa = cari($_POST["keyword"]);
-    // } 
+    // Mengecek apakah tombol submit sudah ditekan atau belum
+    if( isset($_POST["submit"]) ) { 
+
+        // var_dump($_POST);
+
+        // Mengecek apakah data berhasil diubah atau tidak
+        if( update_data_user($_POST) > 0 ) {
+            echo "<script>
+                        alert('Data berhasil diubah');
+                        document.location.href = 'users.php';
+                  </script>";
+        } else {
+            echo "<script>
+                        alert('Data gagal diubah');
+                        
+                  </script>";        }
+
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,35 +68,35 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">UpdateData Users</h1>
+                     <h1 class="h3 mb-2 text-gray-800">Update Data Users</h1>
 
                     
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Form Update Data Users</h6>
-                                <form class="user" action="" method="post">
+                                <form action="" method="post">
+                                    <input type="hidden" class="form-control" name="id" aria-describedby="id" value="<?= $user["id"]; ?>">
                                     <div class="form-group">
                                         <label for="name" class="mt-4">Nama Lengkap : </label>
                                         <input type="text" class="form-control form-control-user"
-                                            id="name" name="name" aria-describedby="name"
-                                            placeholder="Masukkan Nama Lengkap">
+                                            id="name" name="name" aria-describedby="name" value="<?= $user["nama"]; ?>"
+                                             disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name" class="mt-4">Nama Lengkap : </label>
+                                        <label for="username" class="mt-1">Username : </label>
                                         <input type="text" class="form-control form-control-user"
-                                            id="name" name="name" aria-describedby="name"
-                                            placeholder="Masukkan Nama Lengkap">
+                                            id="username" name="username" aria-describedby="username" value="<?= $user["username"]; ?>" disabled>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                         </div>
+                                    <div class="form-group mb-">
+                                        <label for="level" class="mt-1">Level : </label>
+                                        <select id="level" name="level"  class="form-control">
+                                            <option <?php if($user["tingkat"]=="admin") echo 'selected="selected"'; ?> >Admin</option>
+                                            <option  <?php if($user["tingkat"]=="penilai") echo 'selected="selected"'; ?>>Penilai</option>
+                                        </select>
                                     </div>
-                                        <button name="login" type="submit" class="btn btn-primary btn-user btn-block">Login</button>
-                                    </form>
+                                    <button name="submit" type="submit" class="btn btn-primary btn-user btn-block">Update</button>
+                                </form>
                         </div>
                     </div>
 

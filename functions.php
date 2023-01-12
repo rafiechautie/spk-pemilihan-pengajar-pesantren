@@ -50,6 +50,36 @@
         return mysqli_affected_rows($conn);
     }
 
+    // Membuat function ubah untuk menampung data post yang di inginkan
+    function update_data_user($data) {
+        global $conn;
+        
+        // Menangkap value table mahasiswa dengan variabel
+        $id = $data["id"];
+        
+        $level = strtolower($data["level"]);
+        
+        // $gambar = htmlspecialchars($data["gambar"]);
+
+        // Cek apakah user memilih gambar baru atau tidak, jika memilih gambar lama
+        // if( $_FILES['gambar']['error'] === 4 ) {
+        //     // Jika memilih gambar lama maka tetapkan pada gambar yang lama
+        //     $gambar = $gambarLama;
+
+        // Maka gambar itu akan diisi dengan upload atau jalankan fungsi upload gambar yang baru
+        // } else {
+        //     $gambar = upload();
+        // }
+
+
+        // Mengubah data mahasiswa set semuanya kemudian ubah semua data nya menjadi data yang baru
+        $query = "UPDATE users SET tingkat = '$level' WHERE id = '$id'";
+        mysqli_query($conn, $query);
+
+        // Mengembalikan data ketika ada data yang berhasil diubah
+        return mysqli_affected_rows($conn);
+    }
+
     function hapus_data_user($id) {
         global $conn;
         mysqli_query($conn, "DELETE FROM users WHERE id = $id");
@@ -76,7 +106,7 @@
         $username = htmlspecialchars(strtolower(stripslashes($data["username"])));
         $password = htmlspecialchars(mysqli_real_escape_string($conn, $data["password"]));
         $confirmPassword = htmlspecialchars(mysqli_real_escape_string($conn, $data["confirmPassword"]));
-        $level = strtolower($data["level"]);
+        $tingkat = strtolower($data["tingkat"]);
 
 
        // Cek username sudah ada atau belum
@@ -108,7 +138,7 @@
        // var_dump($password); die;
 
        // Tambahkan user baru ke dalam database
-       mysqli_query($conn, "INSERT INTO users VALUES(0, '$name' ,'$username', '$password', '$level')");
+       mysqli_query($conn, "INSERT INTO users VALUES(0, '$name' ,'$username', '$password', '$tingkat')");
        return mysqli_affected_rows($conn);
        
    }
