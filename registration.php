@@ -60,20 +60,20 @@
                             <form class="user" action="" method="post">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="name" name= "name"
-                                            placeholder="Masukkan Nama Lengkap">
+                                            placeholder="Masukkan Nama Lengkap" required>
                                 </div>
                                 <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="username" name="username"
-                                            placeholder="Masukkan Username">
+                                            placeholder="Masukkan Username" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="password" name="password" placeholder="Masukkan Password">
+                                            id="password" name="password" placeholder="Masukkan Password" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="confirmPassword" name="confirmPassword" placeholder="Konfirmasi Password">
+                                            id="confirmPassword" name="confirmPassword" placeholder="Konfirmasi Password" required>
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -25,7 +25,32 @@
         return $rows;
     }
 
-    function hapus($id) {
+    function tambah($data) {
+        global $conn;
+
+        $nrp = htmlspecialchars($data["nrp"]);
+        $nama = htmlspecialchars($data["nama"]);
+        $email = htmlspecialchars($data["email"]);
+        $jurusan = htmlspecialchars($data["jurusan"]);
+        // $gambar = htmlspecialchars($data["gambar"]);
+
+        // Menjalanakn fungsi untuk upload gambar
+        $gambar = upload();
+
+        // Jika yang dikirimkan oleh fungsi upload itu adalah gagal
+        if( !$gambar ) {
+            return false;
+        }
+
+        // Menambahkan data mahasiswa kemudian tambahkan seluruh data nya menjadi data mahasiswa yang baru
+        $query = "INSERT INTO mahasiswa VALUES ('', '$nrp', '$nama', '$email', '$jurusan', '$gambar')";
+        mysqli_query($conn, $query);
+
+        // Mengembalikan data ketika ada data yang berhasil ditambahkan
+        return mysqli_affected_rows($conn);
+    }
+
+    function hapus_data_user($id) {
         global $conn;
         mysqli_query($conn, "DELETE FROM users WHERE id = $id");
         return mysqli_affected_rows($conn);
@@ -47,10 +72,10 @@
          * function mysqli_real_escape_string berguna untuk membuat user bisa memasukkan password yang ada karakter tanda kutip
          * dan tanda kutipnya bisa masuk ke database dengan aman
          */
-        $name = stripslashes($data["name"]);
-        $username = strtolower(stripslashes($data["username"]));
-        $password = mysqli_real_escape_string($conn, $data["password"]);
-        $confirmPassword = mysqli_real_escape_string($conn, $data["confirmPassword"]);
+        $name = htmlspecialchars(stripslashes($data["name"]));
+        $username = htmlspecialchars(strtolower(stripslashes($data["username"])));
+        $password = htmlspecialchars(mysqli_real_escape_string($conn, $data["password"]));
+        $confirmPassword = htmlspecialchars(mysqli_real_escape_string($conn, $data["confirmPassword"]));
         $level = strtolower($data["level"]);
 
 
