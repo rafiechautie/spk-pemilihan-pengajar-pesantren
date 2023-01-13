@@ -9,21 +9,7 @@
         exit;
     }
 
-    // Menyiapkan data yang akan disimpan ke dalam tabel
-    // Menghubungkan functions ke dalam file
     require '../functions.php';
-
-    // Query data mahasiswa disimpan ke dalam variabel mahasiswa dan bentuknya array
-    // ASC / Ascending (Membesar)
-    // DESC / Descending (Mengecil)
-    // $mahasiswa = query("SELECT * FROM mahasiswa");
-
-    // Jika tombol cari ditekan
-    // if( isset($_POST["cari"]) ) {
-
-    //     // Maka jalankan pencarian keyword
-    //     $mahasiswa = cari($_POST["keyword"]);
-    // } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +40,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Halaman Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Halaman Dashboard Admin</h1>
                     </div>
 
 

@@ -4,36 +4,45 @@
     require 'functions.php';
 
     // Mengecek Cookie apkah sudah tersedia
-    // if( isset($_COOKIE['id']) && isset($_COOKIE['key']) ) {
+    if( isset($_COOKIE['id']) && isset($_COOKIE['key']) ) {
         
-        // $id = $_COOKIE['id'];
-        // $key = $_COOKIE['key'];
+        $id = $_COOKIE['id'];
+        $key = $_COOKIE['key'];
+        $tingkat = $_COOKIE['tingkat'];
 
         // Ambil username berdasarkan id
-        // $result = mysqli_query($conn, "SELECT username FROM user WHERE id = $id");
+        $result = mysqli_query($conn, "SELECT username FROM users WHERE id = $id");
 
-        // $row = mysqli_fetch_assoc($result);
+        $row = mysqli_fetch_assoc($result);
+
 
         // Cek cookie dan username
-        // if( $key === hash('sha256', $row['username']) ) {
-        //     $_SESSION['login'] = true;
-        // }
-
-        // Jika session login true (Bisa memakai cara ini)
-        // if( $_COOKIE['login'] == 'true' ) {
+        if( $key === hash('sha256', $row['username']) ) {
             
-        //     // Maka jalankan session login nya
-        //     $_SESSION['login'] = true;
-        // }
-    // }
+            if( isset($_SESSION["login"]) ) {
+                $_SESSION['login'] = true;
+                if($tingkat ===  "admin" ){          
+                    $_SESSION['tingkat'] = "admin";
+                }else if($tingkat ==  "penilai") {
+                    $_SESSION['tingkat'] = "penilai";
+                }
+            }
+        }
+    }
 
-    // Jika sudah login
     if( isset($_SESSION["login"]) ) {
-
-        //Kasih peringatan bahwa anda sudah login
-        // TODO 
+        if($_SESSION["tingkat"] == "admin"){
+            // Pindahkan ke halaman index setelah login
+            header("Location: admin/index.php");
+            exit;
+        }else if($_SESSION["tingkat"] == "penilai"){
+            header("Location: penilai/index.php");
+            exit;
+        }
         
     }
+
+    
 
 
     // Menegcek apakah tombol login sudah ditekan atau belum
@@ -66,12 +75,14 @@
                     $_SESSION["login"] = true;
 
                     // Jika Rememberme dichecklist maka menggunakan cookie
-                    // if( isset($_POST['remember']) ) {
+                    if( isset($_POST['remember']) ) {
                         
                         // Buat cookie
-                    //     setcookie('id', $row['id'], time() + 60);
-                    //     setcookie('key', hash('sha256', $row['username']), time() + 60);
-                    // }
+                        setcookie('id', $row['id'], time() + 60);
+                        setcookie('tingkat', $row['tingkat'], time() + 60);
+                        setcookie('key', hash('sha256', $row['username']), time() + 60);
+                        // setcookie('tingkat', hash('sha256', $row['tingkat']), time() + 60);
+                    }
 
 
                     // Arahkan user untuk masuk ke sebuah sistem
@@ -146,8 +157,8 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
+                                                <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                                                <label class="custom-control-label" for="remember">Remember
                                                     Me</label>
                                             </div>
                                         </div>
