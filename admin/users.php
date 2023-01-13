@@ -13,10 +13,21 @@
     // Menghubungkan functions ke dalam file
     require '../functions.php';
 
-    // Query data mahasiswa disimpan ke dalam variabel mahasiswa dan bentuknya array
-    // ASC / Ascending (Membesar)
-    // DESC / Descending (Mengecil)
-    $users = query("SELECT * FROM users");
+    // Pagination Untuk menentukan halaman yang tampil tiap slide
+
+    // Konfigurasi Pagination
+    $jumlahDataPerHalaman = 2;
+    // $result = mysqli_query($conn, "SELECT * FROM mahasiswa");
+    // $jumlahData = mysqli_num_rows($result);
+    // var_dump($jumlahData);
+
+    $jumlahData = count(query("SELECT * FROM users"));
+    $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+    $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
+    $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
+
+
+    $users = query("SELECT * FROM users  LIMIT $awalData, $jumlahDataPerHalaman");
 
     // Jika tombol cari ditekan
     if( isset($_POST["cari"]) ) {
@@ -122,6 +133,36 @@
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
+                                <nav aria-label="...">
+                                <ul class="pagination">
+                                    <!-- Panah Navigasi Leter Then / Laquo -->
+                                    <?php if( $halamanAktif > 1 ) : ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?>">&laquo;</a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <!-- Navigasi -->
+                                    <?php for( $i = 1; $i <= $jumlahHalaman; $i++ ) : ?>
+
+                                    <!-- Jika link nya aktif maka akan dicetak tebal -->
+                                    <?php if( $i == $halamanAktif ) : ?>
+                                        <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                                    </li>
+                                    <?php else : ?>
+                                        <li class="page-item"><a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a></li>
+                                    <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <!-- Panah Navigasi Gretter Then / Raquo -->
+                                    <?php if( $halamanAktif < $jumlahHalaman ) : ?>
+                                        <li class="page-item">
+                                             <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?>">&raquo;</a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
