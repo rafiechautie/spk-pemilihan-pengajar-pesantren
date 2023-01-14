@@ -64,7 +64,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                     <h1 class="h3 mb-2 text-gray-800">Halaman Tambah Users</h1>
+                     <h1 class="h3 mb-2 text-gray-800">Halaman Data Users</h1>
                     <p class="mb-4">Ini adalah halaman data users yang melakukan registrasi ke sistem pendukung keputusan pemilihan pengajaran pesantren.</p>
 
 

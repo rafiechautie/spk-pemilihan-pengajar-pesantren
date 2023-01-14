@@ -25,25 +25,20 @@
         return $rows;
     }
 
-    function tambah($data) {
+    function tambah_alternatif($data) {
         global $conn;
 
-        $nrp = htmlspecialchars($data["nrp"]);
-        $nama = htmlspecialchars($data["nama"]);
-        $email = htmlspecialchars($data["email"]);
-        $jurusan = htmlspecialchars($data["jurusan"]);
-        // $gambar = htmlspecialchars($data["gambar"]);
+        $nama_alternatif = htmlspecialchars($data["nama_alternatif"]);
+        $jenis_kelamin = htmlspecialchars($data["jenis_kelamin"]);
+        $no_hp = htmlspecialchars($data["no_hp"]);
+        $pendidikan_terakhir = htmlspecialchars($data["pendidikan_terakhir"]);
+        $keahlian = htmlspecialchars($data["keahlian"]);
+        $tugas = htmlspecialchars($data["tugas"]);
+        $asal = htmlspecialchars($data["asal"]);
 
-        // Menjalanakn fungsi untuk upload gambar
-        $gambar = upload();
-
-        // Jika yang dikirimkan oleh fungsi upload itu adalah gagal
-        if( !$gambar ) {
-            return false;
-        }
 
         // Menambahkan data mahasiswa kemudian tambahkan seluruh data nya menjadi data mahasiswa yang baru
-        $query = "INSERT INTO mahasiswa VALUES ('', '$nrp', '$nama', '$email', '$jurusan', '$gambar')";
+        $query = "INSERT INTO alternatif VALUES (0, '$nama_alternatif', '$jenis_kelamin', '$no_hp', '$pendidikan_terakhir', '$keahlian', '$tugas', '$asal')";
         mysqli_query($conn, $query);
 
         // Mengembalikan data ketika ada data yang berhasil ditambahkan

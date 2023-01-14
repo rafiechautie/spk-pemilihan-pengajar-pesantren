@@ -88,7 +88,7 @@
                                         <input type="text" class="form-control form-control-user"
                                             id="username" name="username" aria-describedby="username" value="<?= $user["username"]; ?>" disabled>
                                     </div>
-                                    <div class="form-group mb-">
+                                    <div class="form-group">
                                         <label for="level" class="mt-1">Level : </label>
                                         <select id="level" name="level"  class="form-control">
                                             <option <?php if($user["tingkat"]=="admin") echo 'selected="selected"'; ?> >Admin</option>
