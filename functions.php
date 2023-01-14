@@ -81,6 +81,12 @@
         return mysqli_affected_rows($conn);
     }
 
+    function hapus_data_alternatif($id) {
+        global $conn;
+        mysqli_query($conn, "DELETE FROM alternatif WHERE id_alternatif = $id");
+        return mysqli_affected_rows($conn);
+    }
+
     // Membuat function cari untuk mengetikkan keyword cari
     function cari($keyword) {
 
@@ -88,6 +94,21 @@
         $query = "SELECT * FROM users WHERE nama LIKE '%$keyword%' OR
                                                 username LIKE '%$keyword%' OR
                                                 tingkat LIKE '%$keyword%' ";
+
+        // Memanggil fungsi yang sudah dibuat didalam fungsi baru
+        return query($query);
+    }
+
+    function cari_alternatif($keyword) {
+
+        // Mencari mahasiswa yang namanya tersedia
+        $query = "SELECT * FROM alternatif WHERE nama_alternatif LIKE '%$keyword%' OR
+                                                jenis_kelamin LIKE '%$keyword%' OR
+                                                no_hp LIKE '%$keyword%' OR
+                                                pendidikan_terakhir LIKE '%$keyword%' OR
+                                                keahlian LIKE '%$keyword%' OR
+                                                tugas LIKE '%$keyword%' OR
+                                                asal LIKE '%$keyword%' ";
 
         // Memanggil fungsi yang sudah dibuat didalam fungsi baru
         return query($query);
