@@ -20,12 +20,12 @@
         if( tambah_alternatif($_POST) > 0 ) {
             echo "<script>
                         alert('Data berhasil ditambahkan');
-                        document.location.href = 'index.php';
+                        document.location.href = 'alternatif.php';
                   </script>";
         } else {
             echo "<script>
                         alert('Data gagal ditambahkan');
-                        document.location.href = 'index.php';
+                        document.location.href = 'alternatif.php';
                   </script>";        }
 
     }
@@ -48,7 +48,7 @@
      if( isset($_POST["cari"]) ) {
  
          // Maka jalankan pencarian keyword
-         $users = cari_alternatif($_POST["keyword"]);
+         $alternatif = cari_alternatif($_POST["keyword"]);
      } 
 
 ?>
@@ -94,29 +94,29 @@
                             <label class="col-sm-2 col-form-label" for="jenis_kelamin">Jenis Kelamin : </label>
                             <div class="col-sm-5">
                                 <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" required>  
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="laki-laki">Laki-laki</option>
+                                    <option value="perempuan">Perempuan</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="no_hp">Nomor Handphone : </label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="no_hp" id="no_hp" required>
+                                <input type="number" class="form-control" name="no_hp" id="no_hp" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="pendidikan_terakhir">Pendidikan Terakkhir : </label>
                             <div class="col-sm-5">
                                 <select class="form-control" name="pendidikan_terakhir" id="pendidikan_terakhir" required>
-                                        <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                        <option value="Sd/Sederajat">SD/Sederajat</option>
-                                        <option value="Smp/Sederajat">SMP/Sederajat</option>
-                                        <option value="Sma/Sederajat">SMA/Sederajat</option>
-                                        <option value="Diploma I/II/III">Diploma I/II/III</option>
-                                        <option value="Diploma IV/Strata I">Diploma IV/Strata I</option>
-                                        <option value="Strata II">Strata II</option>
-                                        <option value="Strata III">Strata III</option>
+                                        <option value="tidak sekolah">Tidak Sekolah</option>
+                                        <option value="sd/sederajat">SD/Sederajat</option>
+                                        <option value="smp/sederajat">SMP/Sederajat</option>
+                                        <option value="sma/sederajat">SMA/Sederajat</option>
+                                        <option value="diploma 1/2/3">Diploma I/II/III</option>
+                                        <option value="diploma 4/strata 1">Diploma IV/Strata I</option>
+                                        <option value="strata 2">Strata II</option>
+                                        <option value="strata 3">Strata III</option>
                                 </select>
                             </div>
                         </div>
@@ -130,9 +130,9 @@
                             <label class="col-sm-2 col-form-label" for="tugas">Tugas : </label>
                             <div class="col-sm-5">
                                 <select class="form-control" name="tugas" id="tugas" required>
-                                        <option value="Guru Mata Pelajaran">Guru Mata Pelajaran</option>
-                                        <option value="Guru Agama">Guru Agama</option>
-                                        <option value="Guru Bimbingan Konseling">Guru Bimbingan Konseling</option>
+                                        <option value="guru mata pelajaran">Guru Mata Pelajaran</option>
+                                        <option value="guru agama">Guru Agama</option>
+                                        <option value="guru bimbingan konseling">Guru Bimbingan Konseling</option>
                                 </select>
                             </div>
                         </div>
@@ -140,8 +140,8 @@
                             <label class="col-sm-2 col-form-label" for="asal">Asal : </label>
                             <div class="col-sm-5">
                                 <select class="form-control" name="asal" id="asal" required>
-                                            <option value="Guru PNS">Guru PNS</option>
-                                            <option value="Guru Non-PNS">Guru Non-PNS</option>
+                                            <option value="guru pns">Guru PNS</option>
+                                            <option value="guru non-pns">Guru Non-PNS</option>
                                 </select>
                             </div>
                         </div>

@@ -28,13 +28,13 @@
     function tambah_alternatif($data) {
         global $conn;
 
-        $nama_alternatif = htmlspecialchars($data["nama_alternatif"]);
-        $jenis_kelamin = htmlspecialchars($data["jenis_kelamin"]);
-        $no_hp = htmlspecialchars($data["no_hp"]);
-        $pendidikan_terakhir = htmlspecialchars($data["pendidikan_terakhir"]);
-        $keahlian = htmlspecialchars($data["keahlian"]);
-        $tugas = htmlspecialchars($data["tugas"]);
-        $asal = htmlspecialchars($data["asal"]);
+        $nama_alternatif = htmlspecialchars(strtolower($data["nama_alternatif"]));
+        $jenis_kelamin = htmlspecialchars(strtolower($data["jenis_kelamin"]));
+        $no_hp = htmlspecialchars(strtolower($data["no_hp"]));
+        $pendidikan_terakhir = htmlspecialchars(strtolower($data["pendidikan_terakhir"]));
+        $keahlian = htmlspecialchars(strtolower($data["keahlian"]));
+        $tugas = htmlspecialchars(strtolower($data["tugas"]));
+        $asal = htmlspecialchars(strtolower($data["asal"]));
 
 
         // Menambahkan data mahasiswa kemudian tambahkan seluruh data nya menjadi data mahasiswa yang baru
@@ -75,6 +75,38 @@
         return mysqli_affected_rows($conn);
     }
 
+    function update_data_alternatif($data) {
+        global $conn;
+        
+        // Menangkap value table mahasiswa dengan variabel
+        $id = $data["id_alternatif"];
+
+        // var_dump($id); die;
+        
+        $nama_alternatif = htmlspecialchars(strtolower($data["nama_alternatif"]));
+        $jenis_kelamin = htmlspecialchars(strtolower($data["jenis_kelamin"]));
+        $no_hp = htmlspecialchars(strtolower($data["no_hp"]));
+        $pendidikan_terakhir = htmlspecialchars(strtolower($data["pendidikan_terakhir"]));
+        $keahlian = htmlspecialchars(strtolower($data["keahlian"]));
+        $tugas = htmlspecialchars(strtolower($data["tugas"]));
+        $asal = htmlspecialchars(strtolower($data["asal"]));
+
+
+        // Mengubah data mahasiswa set semuanya kemudian ubah semua data nya menjadi data yang baru
+        $query = "UPDATE alternatif SET nama_alternatif = '$nama_alternatif',
+                                        jenis_kelamin = '$jenis_kelamin',
+                                        no_hp = '$no_hp',
+                                        pendidikan_terakhir = '$pendidikan_terakhir',
+                                        keahlian = '$keahlian',
+                                        tugas = '$tugas',
+                                        asal = '$asal'
+                                    WHERE id_alternatif = '$id'";
+        mysqli_query($conn, $query);
+
+        // Mengembalikan data ketika ada data yang berhasil diubah
+        return mysqli_affected_rows($conn);
+    }
+
     function hapus_data_user($id) {
         global $conn;
         mysqli_query($conn, "DELETE FROM users WHERE id = $id");
@@ -84,6 +116,12 @@
     function hapus_data_alternatif($id) {
         global $conn;
         mysqli_query($conn, "DELETE FROM alternatif WHERE id_alternatif = $id");
+        return mysqli_affected_rows($conn);
+    }
+
+    function hapus_data_kriteria($id) {
+        global $conn;
+        mysqli_query($conn, "DELETE FROM kriteria WHERE id_kriteria = $id");
         return mysqli_affected_rows($conn);
     }
 
