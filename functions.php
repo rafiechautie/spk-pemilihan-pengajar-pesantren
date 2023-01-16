@@ -45,6 +45,33 @@
         return mysqli_affected_rows($conn);
     }
 
+    function tambah_penilaian($data) {
+        global $conn;
+
+        $id_alternatif = (int) $_POST['id_alternatif'];
+        // var_dump($id_alternatif); die;
+        $absensi_kehadiran = substr($_POST['absensi_kehadiran'], 1, 1);
+        $kecapakan_sosial = substr($_POST['kecakapan_sosial'], 1, 1);
+        $kecapakan_kepribadian = substr($_POST['kecakapan_kepribadian'], 1, 1);
+        $kecapakan_pedagogis = substr($_POST['kecakapan_pedagogis'], 1, 1);
+        $sikap_inklusif = substr($_POST ['sikap_inklusif'], 1, 1);
+
+        //apakah ada username yang sama dengan data username yang diinput oleh user
+        $result = mysqli_query($conn, "SELECT * FROM penilaian INNER JOIN alternatif ON penilaian.id_alternatif=alternatif.id_alternatif WHERE alternatif.id_alternatif = '$id_alternatif'");
+
+        // var_dump($result); die;
+
+        if( mysqli_fetch_assoc($result) ) {
+            echo "<script>
+                        alert('Data Alternatif yang diketik sudah terdaftar!');
+                  </script>";
+            return false;
+        }
+
+        mysqli_query($conn, "INSERT INTO penilaian VALUES(0, '$id_alternatif' ,'$absensi_kehadiran', '$kecapakan_sosial', '$kecapakan_kepribadian', '$kecapakan_pedagogis', '$sikap_inklusif')");
+        return mysqli_affected_rows($conn);
+    }
+
     // Membuat function ubah untuk menampung data post yang di inginkan
     function update_data_user($data) {
         global $conn;
@@ -125,6 +152,12 @@
         return mysqli_affected_rows($conn);
     }
 
+    function hapus_data_penilaian($id) {
+        global $conn;
+        mysqli_query($conn, "DELETE FROM penilaian WHERE id_penilaian = $id");
+        return mysqli_affected_rows($conn);
+    }
+
     // Membuat function cari untuk mengetikkan keyword cari
     function cari($keyword) {
 
@@ -147,6 +180,15 @@
                                                 keahlian LIKE '%$keyword%' OR
                                                 tugas LIKE '%$keyword%' OR
                                                 asal LIKE '%$keyword%' ";
+
+        // Memanggil fungsi yang sudah dibuat didalam fungsi baru
+        return query($query);
+    }
+
+    function cari_penilaian($keyword) {
+
+        // Mencari mahasiswa yang namanya tersedia
+        $query = "SELECT * FROM alternatif INNER JOIN penilaian ON alternatif.id_alternatif=penilaian.id_alternatif                           WHERE nama_alternatif LIKE '%$keyword%'";
 
         // Memanggil fungsi yang sudah dibuat didalam fungsi baru
         return query($query);

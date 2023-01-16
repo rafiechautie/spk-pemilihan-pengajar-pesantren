@@ -12,18 +12,6 @@
     // Menyiapkan data yang akan disimpan ke dalam tabel
     // Menghubungkan functions ke dalam file
     require '../functions.php';
-
-    // Query data mahasiswa disimpan ke dalam variabel mahasiswa dan bentuknya array
-    // ASC / Ascending (Membesar)
-    // DESC / Descending (Mengecil)
-    // $mahasiswa = query("SELECT * FROM mahasiswa");
-
-    // Jika tombol cari ditekan
-    // if( isset($_POST["cari"]) ) {
-
-    //     // Maka jalankan pencarian keyword
-    //     $mahasiswa = cari($_POST["keyword"]);
-    // } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
