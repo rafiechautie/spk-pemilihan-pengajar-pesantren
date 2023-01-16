@@ -153,7 +153,7 @@
                             </select>
                           </div>
                           <div class="col-sm-1 mt-2">
-                            Cost
+                            Benefit
                           </div>
                           <div class="col-sm-1">
                             <input type="text" class="form-control" name="kecakapan_sosial" id="kecakapan_sosial">
@@ -171,7 +171,7 @@
                             </select>
                           </div>
                           <div class="col-sm-1 mt-2">
-                            Cost
+                            Benefit
                           </div>
                           <div class="col-sm-1">
                             <input type="text" class="form-control" name="kecakapan_kepribadian" id="kecakapan_kepribadian">
@@ -189,7 +189,7 @@
                             </select>
                           </div>
                           <div class="col-sm-1 mt-2">
-                            Cost
+                          Benefit
                           </div>
                           <div class="col-sm-1">
                             <input type="text" class="form-control" name="kecakapan_pedagogis" id="kecakapan_pedagogis">
@@ -207,7 +207,7 @@
                             </select>
                           </div>
                           <div class="col-sm-1 mt-2">
-                            Cost
+                          Benefit
                           </div>
                           <div class="col-sm-1">
                             <input type="text" class="form-control" name="sikap_inklusif" id="sikap_inklusif">

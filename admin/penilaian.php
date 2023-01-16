@@ -104,11 +104,11 @@
                             <label class="col-sm-2 col-form-label" for="absensi_kehadiran">Absensi Kehadiran : </label>
                             <div class="col-sm-5">
                                 <select class="form-control" name="absensi_kehadiran" id="absensi_kehadiran" required>
-                                        <option>(1) Pengajar tidak hadir >30 hari selama 1 tahun</option>
-                                        <option>(2) Pengajar tidak hadir 21-30 hari selama 1 tahun</option>
+                                        <option>(5) Pengajar tidak hadir >30 hari selama 1 tahun</option>
+                                        <option>(4) Pengajar tidak hadir 21-30 hari selama 1 tahun</option>
                                         <option>(3) Pengajar tidak hadir 11-20 hari selama 1 tahun</option>
-                                        <option>(4) Pengajar tidak hadir 1-10 hari selama 1 tahun</option>        
-                                        <option>(5) Pengajar Selalu Hadir</option>
+                                        <option>(2) Pengajar tidak hadir 1-10 hari selama 1 tahun</option>        
+                                        <option>(1) Pengajar Selalu Hadir</option>
                                 </select>
                             </div>
                         </div>

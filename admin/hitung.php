@@ -13,17 +13,9 @@
     // Menghubungkan functions ke dalam file
     require '../functions.php';
 
-    // Query data mahasiswa disimpan ke dalam variabel mahasiswa dan bentuknya array
-    // ASC / Ascending (Membesar)
-    // DESC / Descending (Mengecil)
-    // $mahasiswa = query("SELECT * FROM mahasiswa");
 
-    // Jika tombol cari ditekan
-    // if( isset($_POST["cari"]) ) {
+    $penilaian = $alternatif = query("SELECT * FROM penilaian INNER JOIN alternatif ON alternatif.id_alternatif=penilaian.id_alternatif");
 
-    //     // Maka jalankan pencarian keyword
-    //     $mahasiswa = cari($_POST["keyword"]);
-    // } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,6 +47,247 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Halaman Perhitungan</h1>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">MATRIX X</h6>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Alternatif</th>
+                                            <th>Absensi Kehadiran</th>
+                                            <th>Kecakapan Sosial</th>
+                                            <th>Kecakapan Kepribadian</th>
+                                            <th>Kecakapan Pedagogis</th>
+                                            <th>Sikap Inklusif</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                      <?php $no = 1 ?>
+                                      <?php foreach($penilaian as $data) : ?>
+                                        <tr>
+                                            <td><?= $no ?></td>
+                                            <td><?= $data["nama_alternatif"] ?></td>
+                                            <td><?= $data["absensi_kehadiran"] ?></td>
+                                            <td><?= $data["kecakapan_sosial"] ?></td>
+                                            <td><?= $data["kecakapan_kepribadian"] ?></td>
+                                            <td><?= $data["kecakapan_pedagogis"] ?></td>
+                                            <td><?= $data["sikap_inklusif"] ?></td>
+                                        </tr>
+                                        <?php $no++ ?>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">NORMALISASI</h6>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Alternatif</th>
+                                            <th>Absensi Kehadiran</th>
+                                            <th>Kecakapan Sosial</th>
+                                            <th>Kecakapan Kepribadian</th>
+                                            <th>Kecakapan Pedagogis</th>
+                                            <th>Sikap Inklusif</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php 
+                                    
+                                    $minimum_absensi = 0;
+                                    $maximum_kecakapan_sosial = 0;
+                                    $maximum_kecakapan_kepribadian = 0;
+                                    $maximum_kecakapan_pedagogis = 0;
+                                    $maximum_sikap_inklusif = 0;
+                                
+
+                                    //Absensi (Cost), cari value yang paling kecil dibagi dengan setiap nilai di setiap alternatif
+                                    $sql = "SELECT*FROM penilaian ORDER BY absensi_kehadiran ASC";
+                                    $hasil = $conn->query($sql);
+                                    $row = $hasil->fetch_row();
+                                    $minimum_absensi = (int) $row[2];
+
+                                    // var_dump($minimum_absensi); die;
+
+                                    //Kecakapan Sosial (Benefit), cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                    $sql = "SELECT*FROM penilaian ORDER BY kecakapan_sosial DESC";
+                                    $hasil = $conn->query($sql);
+                                    $row = $hasil->fetch_row();
+                                    $maximum_kecakapan_sosial = (int) $row[3]; 
+
+                                    // var_dump($maximum_kecakapan_sosial); die;
+
+                                    //Kecakapan Kepribadian, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                    $sql = "SELECT*FROM penilaian ORDER BY kecakapan_kepribadian DESC";
+                                    $hasil = $conn->query($sql);
+                                    $row = $hasil->fetch_row();
+                                    $maximum_kecakapan_kepribadian = (int) $row[4];  
+
+                                    //Kecakapan Pedagogis, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                    $sql = "SELECT*FROM penilaian ORDER BY kecakapan_pedagogis DESC";
+                                    $hasil = $conn->query($sql);
+                                    $row = $hasil->fetch_row();
+                                    $maximum_kecakapan_pedagogis = (int) $row[5];   
+
+                                    //Sikap Inklusif, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                    $sql = "SELECT*FROM penilaian ORDER BY sikap_inklusif DESC";
+                                    $hasil = $conn->query($sql);
+                                    $row = $hasil->fetch_row();
+                                    $maximum_sikap_inklusif = (int) $row[5];   
+                                    
+                                    ?>
+                                      <?php $no = 1 ?>
+                                      <?php foreach($penilaian as $data) : ?>
+                                        <tr>
+                                            <td><?= $no ?></td>
+                                            <td><?= $data["nama_alternatif"] ?></td>
+                                            <td><?= round($minimum_absensi / $data["absensi_kehadiran"] , 2) ?></td>
+                                            <td><?= round($data["kecakapan_sosial"] / $maximum_kecakapan_sosial, 2) ?></td>
+                                            <td><?= round($data["kecakapan_kepribadian"] / $maximum_kecakapan_kepribadian, 2) ?></td>
+                                            <td><?= round($data["kecakapan_pedagogis"] / $maximum_kecakapan_pedagogis, 2) ?></td>
+                                            <td><?= round($data["sikap_inklusif"] / $maximum_sikap_inklusif, 2) ?></td>
+                                        </tr>
+                                        <?php $no++ ?>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">NILAI PREFERENSI</h6>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Alternatif</th>
+                                            <th>Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php 
+                                    
+                                    $bobot_kriteria1 = 0;
+                                    $bobot_kriteria2 = 0;
+                                    $bobot_kriteria3 = 0;
+                                    $bobot_kriteria4 = 0;
+                                    $bobot_kriteria5 = 0;
+                                    $B7 = '';
+                                    $total_penilaian_alternatif = 0.0;
+                                    $id_alternatif = 0;
+                                    $x = 0;
+                                    $sql = "SELECT * FROM kriteria";
+                                    $hasil = $conn->query($sql);
+                                    $rows = $hasil->num_rows;
+                                    if ($rows > 0) {
+                                        $row = $hasil->fetch_row();
+                                        $bobot_kriteria1 = $row[1];
+                                        $bobot_kriteria2 = $row[2];
+                                        $bobot_kriteria3 = $row[3];
+                                        $bobot_kriteria4 = $row[4];
+                                        $bobot_kriteria5 = $row[5];
+                                    }
+
+                                    // var_dump($bobot_kriteria1); die;
+
+                                    $sql = "TRUNCATE TABLE perankingan";
+                                    $hasil = $conn->query($sql);
+
+                                    foreach($penilaian as $data){
+                                        $total_penilaian_alternatif = round((( $minimum_absensi / $data["absensi_kehadiran"]) * $bobot_kriteria1) +
+                                        (($data["kecakapan_sosial"] / $maximum_kecakapan_sosial) * $bobot_kriteria2) +
+                                        (($data["kecakapan_kepribadian"] / $maximum_kecakapan_kepribadian) * $bobot_kriteria3) +
+                                        (($data["kecakapan_pedagogis"] / $maximum_kecakapan_pedagogis) * $bobot_kriteria4) +
+                                        (($data["sikap_inklusif"] / $maximum_sikap_inklusif) * $bobot_kriteria5), 3);
+
+                                        $id_alternatif = $data["id_alternatif"];
+                                        $sql1 = "INSERT INTO perankingan(id_alternatif,nilai_akhir) VALUES ('" . $id_alternatif . "','" . $total_penilaian_alternatif . "')";
+                                        $hasil1 = $conn->query($sql1);
+                                    }
+
+                                    ?>
+                                    <?php 
+                                    
+                                    $perankingan = query("SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif");
+                                    
+                                    ?>
+                                      <?php $no = 1 ?>
+                                      <?php foreach($perankingan as $data) : ?>
+                                        <tr>
+                                            <td><?= $no ?></td>
+                                            <td><?= $data["nama_alternatif"] ?></td>
+                                            <td><?= $data["nilai_akhir"]?></td>
+                                        </tr>
+                                        <?php $no++ ?>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">PERANKINGAN</h6>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Alternatif</th>
+                                            <th>Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php 
+                                    
+                                    $perankingan = query("SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif ORDER BY nilai_akhir DESC");
+                                    
+                                    ?>
+                                      <?php $no = 1 ?>
+                                      <?php foreach($perankingan as $data) : ?>
+                                        <tr>
+                                            <td><?= $no ?></td>
+                                            <td><?= $data["nama_alternatif"] ?></td>
+                                            <td><?= $data["nilai_akhir"]?></td>
+                                        </tr>
+                                        <?php $no++ ?>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
 
