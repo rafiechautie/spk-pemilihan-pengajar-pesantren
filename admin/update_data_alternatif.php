@@ -61,7 +61,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include '../components/navbar_admin.php' ?>
+                <?php include '../components/navbar.php' ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

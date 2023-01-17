@@ -28,7 +28,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include '../components/sidebar_admin.php' ?>
+        <?php include '../components/sidebar_penilai.php' ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

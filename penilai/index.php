@@ -22,7 +22,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include '../components/sidebar_admin.php' ?>
+        <?php include '../components/sidebar_penilai.php' ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -32,7 +32,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include '../components/navbar_admin.php' ?>
+                <?php include '../components/navbar.php' ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

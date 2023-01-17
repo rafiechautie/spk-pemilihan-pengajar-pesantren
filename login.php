@@ -92,12 +92,17 @@
                     }else if($row["tingkat"] == "penilai"){
                       header("Location: penilai/index.php");
                       exit;
+                    }else{
+                        header("Location: index.php");
+                        exit;
                     }
                     
             }
         }
 
-        $error = true;
+        echo "<script>
+                    alert('Username/Password Anda Salah!');
+                </script>";
     }
 
 
@@ -123,6 +128,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -139,12 +145,15 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <img src="assests/img/login1.jpg" alt="" width="500px">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat datang di <br>Sistem Pendukung Keputusan Pengajar Pesantren </h1>
                                     </div>
+
                                     <form class="user" action="" method="post">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"

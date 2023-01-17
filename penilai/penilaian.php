@@ -13,6 +13,21 @@
     // Menghubungkan functions ke dalam file
     require '../functions.php';
 
+    if( isset($_POST["submit"]) ) { 
+
+        if( tambah_penilaian($_POST) > 0 ) {
+            echo "<script>
+                        alert('Data berhasil ditambahkan');
+                        document.location.href = 'penilaian.php';
+                  </script>";
+        } else {
+            echo "<script>
+                        alert('Data gagal ditambahkan');
+                        document.location.href = 'penilaian.php';
+                  </script>";        }
+
+    }
+
     // Konfigurasi Pagination
     $jumlahDataPerHalaman = 10;
     // $result = mysqli_query($conn, "SELECT * FROM mahasiswa");
@@ -45,7 +60,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include '../components/sidebar_admin.php' ?>
+        <?php include '../components/sidebar_penilai.php' ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -66,6 +81,93 @@
                         <h1 class="h3 mb-0 text-gray-800">Halaman Penilaian</h1>
                     </div>
 
+                    
+                    <form method="post" action="">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="id_alternatif">Nama Alternatif : </label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="id_alternatif" id="id_alternatif" required>  
+                                    <?php
+                                    //load nama
+                                    $sql = "SELECT * FROM alternatif";
+                                    $hasil = $conn->query($sql);
+                                    $rows = $hasil->num_rows;
+                                    if ($rows > 0) {
+                                        while ($row = mysqli_fetch_assoc($hasil)) :; {
+                                        } ?> <option value="<?= $row["id_alternatif"]; ?>"><?php echo $row["nama_alternatif"]; ?></option>
+                                    <?php endwhile;
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="absensi_kehadiran">Absensi Kehadiran : </label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="absensi_kehadiran" id="absensi_kehadiran" required>
+                                        <option>(5) Pengajar tidak hadir >30 hari selama 1 tahun</option>
+                                        <option>(4) Pengajar tidak hadir 21-30 hari selama 1 tahun</option>
+                                        <option>(3) Pengajar tidak hadir 11-20 hari selama 1 tahun</option>
+                                        <option>(2) Pengajar tidak hadir 1-10 hari selama 1 tahun</option>        
+                                        <option>(1) Pengajar Selalu Hadir</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="kecakapan_sosial">Kecakapan Sosial : </label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="kecakapan_sosial" id="kecakapan_sosial" required>
+                                        <option>(1) Sangat Kurang</option>
+                                        <option>(2) Kurang</option>     
+                                        <option>(3) Cukup</option>  
+                                        <option>(4) Baik</option> 
+                                        <option>(5) Sangat Baik</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="kecakapan_kepribadian">Kecakapan Kepribadian : </label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="kecakapan_kepribadian" id="kecakapan_kepribadian" required>
+                                        <option>(1) Sangat Kurang</option>
+                                        <option>(2) Kurang</option>     
+                                        <option>(3) Cukup</option>  
+                                        <option>(4) Baik</option> 
+                                        <option>(5) Sangat Baik</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="kecakapan_pedagogis">Kecakapan Pedagogis : </label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="kecakapan_pedagogis" id="kecakapan_pedagogis">
+                                        <option>(1) Sangat Kurang</option>
+                                        <option>(2) Kurang</option>     
+                                        <option>(3) Cukup</option>  
+                                        <option>(4) Baik</option> 
+                                        <option>(5) Sangat Baik</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="sikap_inklusif">Sikap Inklusif : </label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="sikap_inklusif" id="sikap_inklusif">
+                                        <option>(1) Sangat Kurang</option>
+                                        <option>(2) Kurang</option>     
+                                        <option>(3) Cukup</option>  
+                                        <option>(4) Baik</option> 
+                                        <option>(5) Sangat Baik</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                        <button type="submit" name="submit" class="btn btn-outline-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                        </svg>
+                             Submit</button>
+                        </div>
+                    </form>
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -100,6 +202,7 @@
                                             <th>Kecakapan Kepribadian</th>
                                             <th>Kecakapan Pedagogis</th>
                                             <th>Sikap Inklusif</th>
+                                            <th>Action</th> 
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -114,6 +217,14 @@
                                             <td><?= $data["kecakapan_kepribadian"] ?></td>
                                             <td><?= $data["kecakapan_pedagogis"] ?></td>
                                             <td><?= $data["sikap_inklusif"] ?></td>
+                                            <td>
+                                              <a href="hapus_data_penilaian.php?id_penilaian=<?= $data["id_penilaian"]; ?>" onclick="return confirm('yakin ?'); ">
+                                                <svg class="ml-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                </svg>
+                                              </a>
+                                            </td>
                                         </tr>
                                         <?php $no++ ?>
                                         <?php endforeach ?>
