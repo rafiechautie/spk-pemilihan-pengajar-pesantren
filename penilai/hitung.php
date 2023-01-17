@@ -14,7 +14,9 @@
     require '../functions.php';
 
 
-    $penilaian = $alternatif = query("SELECT * FROM penilaian INNER JOIN alternatif ON alternatif.id_alternatif=penilaian.id_alternatif");
+    $sql = "SELECT*FROM penilaian INNER JOIN alternatif ON alternatif.id_alternatif=penilaian.id_alternatif";
+    $hasil = $conn->query($sql);
+    $rows = $hasil->num_rows;
 
 ?>
 <!DOCTYPE html>
@@ -71,19 +73,39 @@
                                     </thead>
                                     <tbody>
                                         
-                                      <?php $no = 1 ?>
-                                      <?php foreach($penilaian as $data) : ?>
+                                    <?php
+
+                                    $no = 1;
+                                    if ($rows > 0) {
+                                        while ($row = $hasil->fetch_row()) {
+
+                                    ?>
+                                      <!-- <?php //$no = 1 ?>                                  
+                                      <?php //foreach($penilaian as $data) : ?> -->
+                    
                                         <tr>
                                             <td><?= $no ?></td>
-                                            <td><?= $data["nama_alternatif"] ?></td>
-                                            <td><?= $data["absensi_kehadiran"] ?></td>
-                                            <td><?= $data["kecakapan_sosial"] ?></td>
-                                            <td><?= $data["kecakapan_kepribadian"] ?></td>
-                                            <td><?= $data["kecakapan_pedagogis"] ?></td>
-                                            <td><?= $data["sikap_inklusif"] ?></td>
+                                            <td><?= $row[8] ?></td>
+                                            <td><?= $row[2] ?></td>
+                                            <td><?= $row[3] ?></td>
+                                            <td><?= $row[4] ?></td>
+                                            <td><?= $row[5] ?></td>
+                                            <td><?= $row[6] ?></td>
                                         </tr>
-                                        <?php $no++ ?>
-                                        <?php endforeach ?>
+                                        <?php }
+                                } else {
+                                    echo "<tr>
+                                        <td>Data Tidak Ada</td>
+                                        <td>Data Tidak Ada</td>
+                                        <td>Data Tidak Ada</td>
+                                        <td>Data Tidak Ada</td>
+                                        <td>Data Tidak Ada</td>
+                                        <td>Data Tidak Ada</td>
+                                        <td>Data Tidak Ada</td>
+                                    <tr>";
+                                } ?>
+                                        <!-- <?php //$no++ ?>
+                                        <?php //endforeach ?>                                      -->
                                     </tbody>
                                 </table>
                             </div>
@@ -114,61 +136,80 @@
                                     <tbody>
                                     <?php 
                                     
-                                    $minimum_absensi = 0;
-                                    $maximum_kecakapan_sosial = 0;
-                                    $maximum_kecakapan_kepribadian = 0;
-                                    $maximum_kecakapan_pedagogis = 0;
-                                    $maximum_sikap_inklusif = 0;
-                                
-
-                                    //Absensi (Cost), cari value yang paling kecil dibagi dengan setiap nilai di setiap alternatif
-                                    $sql = "SELECT*FROM penilaian ORDER BY absensi_kehadiran ASC";
-                                    $hasil = $conn->query($sql);
-                                    $row = $hasil->fetch_row();
-                                    $minimum_absensi = (int) $row[2];
-
-                                    // var_dump($minimum_absensi); die;
-
-                                    //Kecakapan Sosial (Benefit), cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
-                                    $sql = "SELECT*FROM penilaian ORDER BY kecakapan_sosial DESC";
-                                    $hasil = $conn->query($sql);
-                                    $row = $hasil->fetch_row();
-                                    $maximum_kecakapan_sosial = (int) $row[3]; 
-
-                                    // var_dump($maximum_kecakapan_sosial); die;
-
-                                    //Kecakapan Kepribadian, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
-                                    $sql = "SELECT*FROM penilaian ORDER BY kecakapan_kepribadian DESC";
-                                    $hasil = $conn->query($sql);
-                                    $row = $hasil->fetch_row();
-                                    $maximum_kecakapan_kepribadian = (int) $row[4];  
-
-                                    //Kecakapan Pedagogis, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
-                                    $sql = "SELECT*FROM penilaian ORDER BY kecakapan_pedagogis DESC";
-                                    $hasil = $conn->query($sql);
-                                    $row = $hasil->fetch_row();
-                                    $maximum_kecakapan_pedagogis = (int) $row[5];   
-
-                                    //Sikap Inklusif, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
-                                    $sql = "SELECT*FROM penilaian ORDER BY sikap_inklusif DESC";
-                                    $hasil = $conn->query($sql);
-                                    $row = $hasil->fetch_row();
-                                    $maximum_sikap_inklusif = (int) $row[5];   
+                                    if($rows>0){
+                                        $minimum_absensi = 0;
+                                        $maximum_kecakapan_sosial = 0;
+                                        $maximum_kecakapan_kepribadian = 0;
+                                        $maximum_kecakapan_pedagogis = 0;
+                                        $maximum_sikap_inklusif = 0;
                                     
-                                    ?>
-                                      <?php $no = 1 ?>
-                                      <?php foreach($penilaian as $data) : ?>
+    
+                                        //Absensi (Cost), cari value yang paling kecil dibagi dengan setiap nilai di setiap alternatif
+                                        $sql = "SELECT*FROM penilaian ORDER BY absensi_kehadiran ASC";
+                                        $hasil = $conn->query($sql);
+                                        $row = $hasil->fetch_row();
+                                        $minimum_absensi = (int) $row[2];
+    
+                                        // var_dump($minimum_absensi); die;
+    
+                                        //Kecakapan Sosial (Benefit), cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                        $sql = "SELECT*FROM penilaian ORDER BY kecakapan_sosial DESC";
+                                        $hasil = $conn->query($sql);
+                                        $row = $hasil->fetch_row();
+                                        $maximum_kecakapan_sosial = (int) $row[3]; 
+    
+                                        // var_dump($maximum_kecakapan_sosial); die;
+    
+                                        //Kecakapan Kepribadian, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                        $sql = "SELECT*FROM penilaian ORDER BY kecakapan_kepribadian DESC";
+                                        $hasil = $conn->query($sql);
+                                        $row = $hasil->fetch_row();
+                                        $maximum_kecakapan_kepribadian = (int) $row[4];  
+    
+                                        //Kecakapan Pedagogis, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                        $sql = "SELECT*FROM penilaian ORDER BY kecakapan_pedagogis DESC";
+                                        $hasil = $conn->query($sql);
+                                        $row = $hasil->fetch_row();
+                                        $maximum_kecakapan_pedagogis = (int) $row[5];   
+    
+                                        //Sikap Inklusif, cari value yang paling besar. setiap alternatif dibagi dengan value paling besar
+                                        $sql = "SELECT*FROM penilaian ORDER BY sikap_inklusif DESC";
+                                        $hasil = $conn->query($sql);
+                                        $row = $hasil->fetch_row();
+                                        $maximum_sikap_inklusif = (int) $row[5];   
+                                    }else {
+                                        echo "<tr>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                        <tr>";
+                                    }
+
+                                    $no = 1;
+                                    $sql = "SELECT*FROM penilaian INNER JOIN alternatif ON alternatif.id_alternatif=penilaian.id_alternatif";
+                                    $hasil = $conn->query($sql);
+                                    $rows = $hasil->num_rows;
+                                    if ($rows > 0) {
+                                        while ($row = $hasil->fetch_row()) {
+
+                                            // var_dump($row); die;
+                                    
+                                    ?>                                      
                                         <tr>
                                             <td><?= $no ?></td>
-                                            <td><?= $data["nama_alternatif"] ?></td>
-                                            <td><?= round($minimum_absensi / $data["absensi_kehadiran"] , 2) ?></td>
-                                            <td><?= round($data["kecakapan_sosial"] / $maximum_kecakapan_sosial, 2) ?></td>
-                                            <td><?= round($data["kecakapan_kepribadian"] / $maximum_kecakapan_kepribadian, 2) ?></td>
-                                            <td><?= round($data["kecakapan_pedagogis"] / $maximum_kecakapan_pedagogis, 2) ?></td>
-                                            <td><?= round($data["sikap_inklusif"] / $maximum_sikap_inklusif, 2) ?></td>
+                                            <td><?= $row[8] ?></td>
+                                            <td><?= round($minimum_absensi / $row[2] , 2) ?></td>
+                                            <td><?= round($row[3] / $maximum_kecakapan_sosial, 2) ?></td>
+                                            <td><?= round($row[4] / $maximum_kecakapan_kepribadian, 2) ?></td>
+                                            <td><?= round($row[5] / $maximum_kecakapan_pedagogis, 2) ?></td>
+                                            <td><?= round($row[6] / $maximum_sikap_inklusif, 2) ?></td>
                                         </tr>
-                                        <?php $no++ ?>
-                                        <?php endforeach ?>
+                                        <?php }
+                                }  ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -213,40 +254,62 @@
                                         $bobot_kriteria3 = $row[3];
                                         $bobot_kriteria4 = $row[4];
                                         $bobot_kriteria5 = $row[5];
+                                        
                                     }
+                                    // var_dump($bobot_kriteria5);die;
 
                                     // var_dump($bobot_kriteria1); die;
 
                                     $sql = "TRUNCATE TABLE perankingan";
                                     $hasil = $conn->query($sql);
 
-                                    foreach($penilaian as $data){
-                                        $total_penilaian_alternatif = round((( $minimum_absensi / $data["absensi_kehadiran"]) * $bobot_kriteria1) +
-                                        (($data["kecakapan_sosial"] / $maximum_kecakapan_sosial) * $bobot_kriteria2) +
-                                        (($data["kecakapan_kepribadian"] / $maximum_kecakapan_kepribadian) * $bobot_kriteria3) +
-                                        (($data["kecakapan_pedagogis"] / $maximum_kecakapan_pedagogis) * $bobot_kriteria4) +
-                                        (($data["sikap_inklusif"] / $maximum_sikap_inklusif) * $bobot_kriteria5), 3);
 
-                                        $id_alternatif = $data["id_alternatif"];
-                                        $sql1 = "INSERT INTO perankingan(id_alternatif,nilai_akhir) VALUES ('" . $id_alternatif . "','" . $total_penilaian_alternatif . "')";
-                                        $hasil1 = $conn->query($sql1);
+                                    $sql = "SELECT * FROM penilaian INNER JOIN alternatif ON alternatif.id_alternatif=penilaian.id_alternatif";
+                                    $hasil = $conn->query($sql);
+                                    $rows = $hasil->num_rows;
+                                    if ($rows > 0) {
+                                        while ($row = $hasil->fetch_row()) {
+                                            // var_dump($row); die;
+
+                                            $total_penilaian_alternatif = round((( $minimum_absensi / $row[2]) * $bobot_kriteria1) +
+                                            (($row[3] / $maximum_kecakapan_sosial) * $bobot_kriteria2) +
+                                            (($row[4] / $maximum_kecakapan_kepribadian) * $bobot_kriteria3) +
+                                            (($row[5] / $maximum_kecakapan_pedagogis) * $bobot_kriteria4) +
+                                            (($row[6] / $maximum_sikap_inklusif) * $bobot_kriteria5), 3);
+
+                                            $id_alternatif = $row[1];
+                                            $sql1 = "INSERT INTO perankingan(id_alternatif,nilai_akhir) VALUES ('" . $id_alternatif . "','" . $total_penilaian_alternatif . "')";
+                                            $hasil1 = $conn->query($sql1);
+                                        }
                                     }
+
 
                                     ?>
                                     <?php 
                                     
-                                    $perankingan = query("SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif");
+                                    //$perankingan = query("SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif");
                                     
+                                    $sql = "SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif";
+                                    $hasil = $conn->query($sql);
+                                    $rows = $hasil->num_rows;
+                                    if ($rows > 0) {
+                                        while ($row = $hasil->fetch_row()) {
+                                            // var_dump($row);
                                     ?>
                                       <?php $no = 1 ?>
-                                      <?php foreach($perankingan as $data) : ?>
                                         <tr>
                                             <td><?= $no ?></td>
-                                            <td><?= $data["nama_alternatif"] ?></td>
-                                            <td><?= $data["nilai_akhir"]?></td>
+                                            <td><?= $row[4] ?></td>
+                                            <td><?= $row[2]?></td>
                                         </tr>
-                                        <?php $no++ ?>
-                                        <?php endforeach ?>
+                                        <?php }
+                                        } else {
+                                            echo "<tr>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                            <tr>";
+                                        } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -272,18 +335,27 @@
                                     <tbody>
                                     <?php 
                                     
-                                    $perankingan = query("SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif ORDER BY nilai_akhir DESC");
-                                    
+                                    //$perankingan = query("SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif ORDER BY nilai_akhir DESC");
+                                    $sql = "SELECT*FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif ORDER BY nilai_akhir DESC";
+                                    $hasil = $conn->query($sql);
+                                    if ($hasil->num_rows > 0) {
+                                    while ($row = $hasil->fetch_row()) {
+
                                     ?>
                                       <?php $no = 1 ?>
-                                      <?php foreach($perankingan as $data) : ?>
                                         <tr>
                                             <td><?= $no ?></td>
-                                            <td><?= $data["nama_alternatif"] ?></td>
-                                            <td><?= $data["nilai_akhir"]?></td>
+                                            <td><?= $row[4] ?></td>
+                                            <td><?= $row[2]?></td>
                                         </tr>
-                                        <?php $no++ ?>
-                                        <?php endforeach ?>
+                                        <?php }
+                                    } else {
+                                        echo "<tr>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                            <td>Data Tidak Ada</td>
+                                        <tr>";
+                                    } ?>
                                     </tbody>
                                 </table>
                             </div>

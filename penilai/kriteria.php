@@ -268,6 +268,11 @@
                         } else {
                           echo "<tr>
                               <td>Data Tidak Ada</td>
+                              <td>Data Tidak Ada</td>
+                              <td>Data Tidak Ada</td>
+                              <td>Data Tidak Ada</td>
+                              <td>Data Tidak Ada</td>
+                              <td>Data Tidak Ada</td>
                           <tr>";
                         } ?>
                         </tbody>

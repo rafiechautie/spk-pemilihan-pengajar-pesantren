@@ -40,7 +40,7 @@
     $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
 
 
-    $penilaian = query("SELECT * FROM penilaian INNER JOIN alternatif ON alternatif.id_alternatif=penilaian.id_alternatif LIMIT $awalData, $jumlahDataPerHalaman");
+
 
     // Jika tombol cari ditekan
     if( isset($_POST["cari"]) ) {
@@ -206,19 +206,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                      <?php $no = 1 ?>
-                                      <?php foreach($penilaian as $data) : ?>
+                                      
+                                        <?php
+
+                                        $no = 1;
+                                        $sql = "SELECT * FROM penilaian INNER JOIN alternatif ON alternatif.id_alternatif=penilaian.id_alternatif LIMIT $awalData, $jumlahDataPerHalaman";
+                                        $hasil = $conn->query($sql);
+                                        $rows = $hasil->num_rows;
+                                        if ($rows > 0) {
+                                            while ($row = $hasil->fetch_row()) 
+                                            {
+
+                                                // var_dump($row);die;
+                                        ?>
                                         <tr>
                                             <td><?= $no ?></td>
-                                            <td><?= $data["nama_alternatif"] ?></td>
-                                            <td><?= $data["absensi_kehadiran"] ?></td>
-                                            <td><?= $data["kecakapan_sosial"] ?></td>
-                                            <td><?= $data["kecakapan_kepribadian"] ?></td>
-                                            <td><?= $data["kecakapan_pedagogis"] ?></td>
-                                            <td><?= $data["sikap_inklusif"] ?></td>
+                                            <td><?= $row[8] ?></td>
+                                            <td><?= $row[2] ?></td>
+                                            <td><?= $row[3] ?></td>
+                                            <td><?= $row[4] ?></td>
+                                            <td><?= $row[5] ?></td>
+                                            <td><?= $row[6] ?></td>
                                             <td>
-                                              <a href="hapus_data_penilaian.php?id_penilaian=<?= $data["id_penilaian"]; ?>" onclick="return confirm('yakin ?'); ">
+                                              <a href="hapus_data_penilaian.php?id_penilaian=<?= $row[0]; ?>" onclick="return confirm('yakin ?'); ">
                                                 <svg class="ml-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -226,8 +236,19 @@
                                               </a>
                                             </td>
                                         </tr>
-                                        <?php $no++ ?>
-                                        <?php endforeach ?>
+                                        <?php }
+                                        } else {
+                                            echo "<tr>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                                <td>Data Tidak Ada</td>
+                                            <tr>";
+                                        } ?>
                                     </tbody>
                                 </table>
                                 <nav aria-label="...">

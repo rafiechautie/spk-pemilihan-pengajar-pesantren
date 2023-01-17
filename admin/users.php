@@ -16,7 +16,7 @@
     // Pagination Untuk menentukan halaman yang tampil tiap slide
 
     // Konfigurasi Pagination
-    $jumlahDataPerHalaman = 2;
+    $jumlahDataPerHalaman = 5;
     // $result = mysqli_query($conn, "SELECT * FROM mahasiswa");
     // $jumlahData = mysqli_num_rows($result);
     // var_dump($jumlahData);

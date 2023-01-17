@@ -109,6 +109,9 @@
                         <h1 class="h3 mb-0 text-gray-800">Halaman Dashboard Pengunjung</h1>
                     </div>
 
+                    <p>
+                        Silahkan tunggu konfirmasi admin
+                    </p>
 
                 </div>
                 <!-- /.container-fluid -->
