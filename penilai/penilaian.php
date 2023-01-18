@@ -220,7 +220,7 @@
                                                 // var_dump($row);die;
                                         ?>
                                         <tr>
-                                            <td><?= $no ?></td>
+                                            <td><?= $no + $awalData ?></td>
                                             <td><?= $row[8] ?></td>
                                             <td><?= $row[2] ?></td>
                                             <td><?= $row[3] ?></td>
@@ -236,6 +236,7 @@
                                               </a>
                                             </td>
                                         </tr>
+                                        <?php $no++ ?>
                                         <?php }
                                         } else {
                                             echo "<tr>

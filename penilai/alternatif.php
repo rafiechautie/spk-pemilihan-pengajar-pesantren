@@ -106,7 +106,7 @@
                                       <?php $no = 1 ?>
                                       <?php foreach($alternatif as $data) : ?>
                                         <tr>
-                                            <td><?= $no ?></td>
+                                            <td><?= $no + $awalData ?></td>
                                             <td><?= $data["nama_alternatif"] ?></td>
                                             <td><?= $data["jenis_kelamin"] ?></td>
                                             <td><?= $data["no_hp"] ?></td>

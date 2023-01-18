@@ -111,7 +111,7 @@
                                       <?php $no = 1 ?>
                                       <?php foreach($users as $user) : ?>
                                         <tr>
-                                            <td><?= $no ?></td>
+                                            <td><?= $no + $awalData ?></td>
                                             <td><?= $user["nama"] ?></td>
                                             <td><?= $user["tingkat"] ?></td>
                                             <td>

@@ -21,24 +21,21 @@
             
             if( isset($_SESSION["login"]) ) {
                 $_SESSION['login'] = true;
-                if($tingkat ===  "admin" ){          
+                if($tingkat === hash('sha256', $row['username'])){          
                     $_SESSION['tingkat'] = "admin";
-                }else if($tingkat ==  "penilai") {
+                }else if($tingkat === hash('sha256', $row['username'])) {
                     $_SESSION['tingkat'] = "penilai";
+                }else{
+                    $_SESSION['tingkat'] = "pengunjung";
                 }
             }
         }
     }
 
     if( isset($_SESSION["login"]) ) {
-        if($_SESSION["tingkat"] == "admin"){
-            // Pindahkan ke halaman index setelah login
-            header("Location: admin/index.php");
-            exit;
-        }else if($_SESSION["tingkat"] == "penilai"){
-            header("Location: penilai/index.php");
-            exit;
-        }
+        echo "<script>
+                        alert('Silahkan Login Kembali');
+                  </script>";
         
     }
 
@@ -79,9 +76,9 @@
                         
                         // Buat cookie
                         setcookie('id', $row['id'], time() + 60);
-                        setcookie('tingkat', $row['tingkat'], time() + 60);
+                        // setcookie('tingkat', $row['tingkat'], time() + 60);
                         setcookie('key', hash('sha256', $row['username']), time() + 60);
-                        // setcookie('tingkat', hash('sha256', $row['tingkat']), time() + 60);
+                        setcookie('tingkat', hash('sha256', $row['tingkat']), time() + 60);
                     }
 
 

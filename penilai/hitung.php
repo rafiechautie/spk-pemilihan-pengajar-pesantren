@@ -92,7 +92,10 @@
                                             <td><?= $row[5] ?></td>
                                             <td><?= $row[6] ?></td>
                                         </tr>
+                                        <?php $no++ ?>
+
                                         <?php }
+                                        
                                 } else {
                                     echo "<tr>
                                         <td>Data Tidak Ada</td>
@@ -208,6 +211,7 @@
                                             <td><?= round($row[5] / $maximum_kecakapan_pedagogis, 2) ?></td>
                                             <td><?= round($row[6] / $maximum_sikap_inklusif, 2) ?></td>
                                         </tr>
+                                        <?php $no++ ?>
                                         <?php }
                                 }  ?>
                                     </tbody>
@@ -292,16 +296,19 @@
                                     $sql = "SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif";
                                     $hasil = $conn->query($sql);
                                     $rows = $hasil->num_rows;
+                                    $no = 1;
                                     if ($rows > 0) {
                                         while ($row = $hasil->fetch_row()) {
                                             // var_dump($row);
+                                            
                                     ?>
-                                      <?php $no = 1 ?>
+                                      <?php  ?>
                                         <tr>
                                             <td><?= $no ?></td>
                                             <td><?= $row[4] ?></td>
                                             <td><?= $row[2]?></td>
                                         </tr>
+                                        <?php $no++ ?>
                                         <?php }
                                         } else {
                                             echo "<tr>
@@ -338,16 +345,18 @@
                                     //$perankingan = query("SELECT * FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif ORDER BY nilai_akhir DESC");
                                     $sql = "SELECT*FROM perankingan INNER JOIN alternatif ON alternatif.id_alternatif=perankingan.id_alternatif ORDER BY nilai_akhir DESC";
                                     $hasil = $conn->query($sql);
+                                    $no = 1;
                                     if ($hasil->num_rows > 0) {
                                     while ($row = $hasil->fetch_row()) {
 
                                     ?>
-                                      <?php $no = 1 ?>
+                                      
                                         <tr>
-                                            <td><?= $no ?></td>
+                                            <td><?= $no  ?></td>
                                             <td><?= $row[4] ?></td>
                                             <td><?= $row[2]?></td>
                                         </tr>
+                                        <?php $no++ ?>
                                         <?php }
                                     } else {
                                         echo "<tr>
