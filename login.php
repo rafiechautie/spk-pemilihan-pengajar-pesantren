@@ -156,6 +156,7 @@
                                             <input type="text" class="form-control form-control-user"
                                                 id="username" name="username" aria-describedby="username"
                                                 placeholder="Masukkan Username Anda">
+                                    
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
