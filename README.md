@@ -14,11 +14,13 @@ A system that assists in decision-making for selecting the best teacher in schoo
   <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-login.png" width="500">
   <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-dashboard-pengunjung.png" width="500">
 <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-dashboard-admin.png" width="500">
+  <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/evaluator-page.png" width="500">
   <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-halaman-perhitungan.png" width="500">
   <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-halaman-penilaian.png" width="500">
   <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-halaman-kriteria.png" width="500">
   <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-halaman-data-users.png" width="500">
   <img src="https://github.com/rafiechautie/spk-pemilihan-pengajar-pesantren/blob/main/assests/img/SPK%20Pemilihan%20Pengajar%20Pesantren-halaman-data-alternatif.png" width="500">
+  
 </p>
 
 ## Installation
